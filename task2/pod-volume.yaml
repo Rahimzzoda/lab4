@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: volume-pod
+  labels:
+    app: demo-volume
+spec:
+  containers:
+  - name: busybox
+    image: busybox
+    command: ['sh', '-c', 'echo "Hello from K8s!" > /data/hello.txt && sleep 3600']
+    volumeMounts:
+    - name: my-volume
+      mountPath: /data
+  volumes:
+  - name: my-volume
+    emptyDir: {}
